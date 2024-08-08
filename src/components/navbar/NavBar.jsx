@@ -9,8 +9,8 @@ const NavBar = () => {
   return (
     <div>
       <nav className="nav flex justify-between items-center py-8 container mx-auto flex-col lg:flex-row gap-5 lg:gap-0">
-        <h1 className="text-2xl font-extrabold text-purple-600 ">
-          <NavLink to={"/"}>FoodReceipe</NavLink>
+        <h1 className="text-2xl font-extrabold text-black ">
+          <NavLink to={"/"}>FoodRecipe</NavLink>
         </h1>
         <form onSubmit={handleSubmit}>
           
