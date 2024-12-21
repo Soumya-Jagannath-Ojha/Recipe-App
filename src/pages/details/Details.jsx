@@ -1,25 +1,30 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalContext } from "../../context/Context";
 import Favorites from "../favorites/Favorites";
 
 const Details = () => {
   const { id } = useParams();
-  const { recipeDetailsData, setRecipeDetailsData, handleAddToFavorite,favoritesList } =
+  const { loading,setLoading, recipeDetailsData, setRecipeDetailsData, handleAddToFavorite,favoritesList } =
     useContext(GlobalContext);
 
   useEffect(() => {
     async function getRecipeDetails() {
+      // setLoading(true);
       const response = await fetch(
         `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
       );
       const data = await response.json();
       if (data?.data) {
+        // setLoading(false);
         setRecipeDetailsData(data?.data);
       }
     }
     getRecipeDetails();
   }, []);
+
+  if (loading) return <div><h1 className="text-lg font-semibold text-gray-700 text-center animate-pulse">Loading Data! Please wait...</h1></div>;
+
 
   return (
     <div className="container mx-auto py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -58,9 +63,11 @@ const Details = () => {
           <span className="text-2xl font-semibold text-black ">
             Ingredients:
           </span>
-          <ul className="flex flex-col gap-3">
-            {recipeDetailsData?.recipe?.ingredients.map((ingredient) => (
-              <li>
+          <ul className="mt-3 ml-4 flex flex-col gap-3 list-disc">
+            {recipeDetailsData?.recipe?.ingredients.map((ingredient,index) => (
+            
+              
+              <li key={index}>
                 <span className="text-xl  text-black">
                   {ingredient.quantity} {ingredient.unit}
                 </span>

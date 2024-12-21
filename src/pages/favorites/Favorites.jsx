@@ -11,7 +11,7 @@ const Favorites = () => {
         favoritesList.map((item) => <RecipeItem item={item} />)
       ) : (
         <div>
-          <p className="lg:text-4xl text-center text-xl text-black font-extrabold">
+          <p className="lg:text-4xl text-center text-xl text-gray-700 font-extrabold">
             Nothing is added in favorites.
           </p>
         </div>
